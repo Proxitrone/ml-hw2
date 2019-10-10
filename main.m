@@ -17,6 +17,7 @@
     end
     
  %% Naive Bayes
-    mode = 0;
-    error = bayes_classifier(trainX, trainY, testX, testY, mode);
+    mode = 1;
+    bin_num = 32;
+    error = bayes_classifier(trainX, trainY, testX, testY, mode, bin_num);
  

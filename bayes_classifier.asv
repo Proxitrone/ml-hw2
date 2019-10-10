@@ -40,19 +40,13 @@ function error = bayes_classifier(trainX, trainY, testX, testY, mode, bin_num)
     %% Both
     % Calculate likelihood for the test set
     for k=1: test_data_num
-        sample_likelihood = zeros(size(testX(:,k)));
         for i=1:class_num
             if mode
                %sample_likelihood = normpdf(testX(:,k), data_mean{i}', data_vari{i}');
                %compute log of it to prevent overflow
-               pdf_mean = data_mean{i};
-               pdf_vari = data_vari{i};
-%                sample_likelihood = lognpdf(testX(:,k), pdf_mean, pdf_vari);
-               sample_likelihood = my_Gauss(testX(:,k), pdf_mean, pdf_vari);
-               %sample_likelihood = log(normpdf(testX(:,k), pdf_mean, pdf_vari));
+               sample_likelihood = lognpdf(testX(:,k), data_mean{i}, data_vari{i});
             else
                sample_likelihood =log(compute_likelihood(freq_prob{i}, discrete_testX(:,k)));
-            
             end
              
             % Regular estimate
@@ -72,7 +66,7 @@ function error = bayes_classifier(trainX, trainY, testX, testY, mode, bin_num)
    
     if mode
         tmp = data_mean;
-        %log_class_estimates = log_class_estimates';
+%         log_class_estimates = log_class_estimates';
     else
         tmp = freq_prob;
     end
