@@ -6,14 +6,15 @@ function [data_mean, data_vari] = compute_data_parameters(classes_data, class_nu
     
     for i=1:class_num
         data_mean{i} = mean(classes_data{i}, 2);
-        data_vari{i} = var(classes_data{i}, 0, 2);
+%         data_vari{i} = var(classes_data{i}, 0, 2);
+        data_vari{i} = std(classes_data{i}, 0, 2);
         class_data_num = size(classes_data{i}, 2);
         % Pseudocount zero mean and the same variance
-        [data_mean{i}, indxm] = pseudocount(data_mean{i}');
-        [data_vari{i}, indxv] = pseudocount(data_vari{i}');
-        
-        data_mean{i} = data_mean{i}';
-        data_vari{i} = data_vari{i}';
+%         [data_mean{i}, indxm] = pseudocount(data_mean{i}');
+%         [data_vari{i}, indxv] = pseudocount(data_vari{i}');
+%         
+%         data_mean{i} = data_mean{i}';
+%         data_vari{i} = data_vari{i}';
         
     end
     

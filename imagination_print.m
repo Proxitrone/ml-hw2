@@ -16,7 +16,7 @@ function error = imagination_print(classifier, fileID, mode)
         [val, idx] = max(classifier{i},[], 2);
         
         if mode
-            bayes_representation(idx>128) = 1;
+            bayes_representation(val>128) = 1;
         else
             bayes_representation(idx>15)= 1;
         end

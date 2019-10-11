@@ -1,4 +1,4 @@
-function error = bayes_classifier(trainX, trainY, testX, testY, mode, bin_num)
+function error = bayes_classifier(trainX, trainY, testX, testY, mode)
 %BAYES_CLASSIFIER Use the Naive Bayes classifier to classify images from
 %the MNIST dataset
 %   There are 2 modes, discrete and continuous
@@ -10,7 +10,8 @@ function error = bayes_classifier(trainX, trainY, testX, testY, mode, bin_num)
     train_data_num = size(trainY, 2);
     test_data_num = size(testY, 2);
     feature_num = size(trainX, 1);
-
+    bin_num = 32;
+    
     prior = zeros(class_num, 1);
     for i=1:train_data_num
         prior(trainY(i)+1) =  prior(trainY(i)+1)+1;
@@ -49,7 +50,7 @@ function error = bayes_classifier(trainX, trainY, testX, testY, mode, bin_num)
                pdf_vari = data_vari{i};
 %                sample_likelihood = lognpdf(testX(:,k), pdf_mean, pdf_vari);
                sample_likelihood = my_Gauss(testX(:,k), pdf_mean, pdf_vari);
-               %sample_likelihood = log(normpdf(testX(:,k), pdf_mean, pdf_vari));
+%                sample_likelihood = log(normpdf(testX(:,k), pdf_mean, pdf_vari));
             else
                sample_likelihood =log(compute_likelihood(freq_prob{i}, discrete_testX(:,k)));
             
@@ -83,7 +84,6 @@ function error = bayes_classifier(trainX, trainY, testX, testY, mode, bin_num)
     imagination_print(tmp, f, mode);
     fprintf(f, append('Error rate: ', num2str(error)), '\n');
     fclose(f);
-    
     
 end
 
