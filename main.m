@@ -17,7 +17,13 @@
     end
     
  %% Naive Bayes
-    mode = 1;
-    
-    error = bayes_classifier(trainX, trainY, testX, testY, mode);
  
+    mode = 1;
+    error = bayes_classifier(trainX, trainY, testX, testY, mode);
+    
+%% Online Learning
+
+    a=10;
+    b = 1;
+    file_name = 'testfile.txt';
+    [b_like, beta_prior, posterior] = online_learning(file_name, a, b);

@@ -68,7 +68,7 @@ function error = bayes_classifier(trainX, trainY, testX, testY, mode)
     % Marginalize
     log_class_estimates = log_class_estimates./sum(log_class_estimates);
     
-    file_name = 'answer.txt';
+    file_name = 'answer_bayes.txt';
     f = fopen(file_name, 'w+');
    
     if mode
